@@ -2,7 +2,7 @@
         <head>
         <title>cdproject</title>
         <meta charset="utf-8">
-<meta property="head" content="H1">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -142,249 +142,132 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Final << <a href='Final.html'>Previous</a> <br /><h1>Brython</h1>
-<p><button id="add1to100">1 add to 100</button></p>
-<!-- 導入 brython 程式庫 -->
-<p>
-<script src="./../cmsimde/static/brython.js"></script>
-<script src="./../cmsimde/static/brython_stdlib.js"></script>
-</p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
-}
-</script>
-</p>
-<p><!-- 導入 FileSaver 與 filereader --></p>
-<p>
-<script src="./../cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/filereader.js" type="text/javascript"></script>
-</p>
-<p><!-- 導入 ace --></p>
-<p>
-<script src="./../cmsimde/static/ace/ace.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/ext-language_tools.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/mode-python3.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/snippets/python.js" type="text/javascript"></script>
-</p>
-<p><!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
-<script src="./../cmsimde/static/Cango-24v03-min.js"></script>
-<script src="./../cmsimde/static/gearUtils-09.js"></script>
-<script src="./../cmsimde/static/SVGpathUtils-6v03-min.js"></script>
-<script src="./../cmsimde/static/sylvester.js"></script>
-<script src="./../cmsimde/static/PrairieDraw.js"></script>
-</p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src1"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/javascript">
-function doSave(storage_id, filename){
-    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
-    filename = document.getElementById(filename).value
-    saveAs(blob, filename+".py");
-}
-</script>
-</p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-# 清除畫布
-def clear_bd1(ev):
-    bd = doc["brython_div1"]
-    bd.clear()
-Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
-# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
-def run1():
-    # 利用 get 取下 src 變數值
-    try:
-        url = doc.query["src"]
-    except:
-        url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c3a6deaf717f8f2739a4b1392a5ab10936e9693a/from_1_add_to_10_1.py"
-    prog = open(url).read()
-
-    # 將程式載入編輯區
-    Ace1.editor.setValue(prog)
-    Ace1.editor.scrollToRow(0)
-    Ace1.editor.gotoLine(0)
-    # 直接執行程式
-    #ns = {'__name__':'__main__'}
-    #exec(prog, ns)
-    # 按下 run 按鈕
-    Ace1.run()
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run1'].bind('click', Ace1.run)
-doc['kw_show_console1'].bind('click', Ace1.show_console)
-doc['kw_clear_console1'].bind('click', Ace1.clear_console)
-doc['clear_bd1'].bind('click', clear_bd1)
-# 呼叫函式執行
-run1()
-</script>
-</p>
-<p><!-- add 1 to 100 開始 -->
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# 清除畫布
-def clear_bd1(ev):
-    bd = doc["brython_div1"]
-    bd.clear()
-
-# 利用 ace 中的 Editor 建立 Ace2 物件, 其中的輸入變數分別對應到頁面中的編輯區物件
-Ace2 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
-
-add1to100_url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c48e37714f055c3a0027cbfef59e442a6ef659b9/from_1_add_to_100_1.py"
-
-# 從 gist 取得程式碼
-add_src = open(add1to100_url).read()
-def add(ev):
-    Ace2.editor.setValue(add_src)
-    Ace2.editor.scrollToRow(0)
-    Ace2.editor.gotoLine(0)
-    Ace2.run()
-
-# id 為 "add1to100" 的按鈕點按時, 執行 add 方法
-doc["add1to100"].bind('click', add)
-</script>
-</p>
-<p><!-- add 1 to 100 結束--></p>
-<!-- editor1 開始 -->
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<p><!-- 存擋表單開始 --></p>
-<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
-<p><!-- 存擋表單結束 --></p>
-<p></p>
-<p><!-- 執行與清除按鈕開始 --></p>
-<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
-<p><!-- 執行與清除按鈕結束 --></p>
-<p></p>
-<p><!-- 程式執行 ouput 區 --></p>
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
-<p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
-<div id="brython_div1"></div>
-<!-- editor1 結束 --><hr/><!-- ########################################## -->
-<p>從 1 累加到 100 part2:</p>
-<p><button id="add1to100part2">1 add to 100</button><button id="cango_three_gears">cango_three_gears</button><button id="bsnake">BSnake</button><button id="aitetris">AI Tetris</button></p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src2"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-# 清除畫布
-def clear_bd2(ev):
-    bd = doc["brython_div2"]
-    bd.clear()
-Ace3 = ace.Editor(editor_id="kw_editor2", console_id="kw_console2", container_id="kw__container2", storage_id="kw_py_src2" )
-# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
-def run2():
-    # 利用 get 取下 src 變數值
-    try:
-        url = doc.query["src2"]
-    except:
-        url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c3a6deaf717f8f2739a4b1392a5ab10936e9693a/from_1_add_to_10_1.py"
-    prog = open(url).read()
-
-    # 將程式載入編輯區
-    Ace3.editor.setValue(prog)
-    Ace3.editor.scrollToRow(0)
-    Ace3.editor.gotoLine(0)
-    # 直接執行程式
-    #ns = {'__name__':'__main__'}
-    #exec(prog, ns)
-    # 按下 run 按鈕
-    Ace3.run()
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run2'].bind('click', Ace3.run)
-doc['kw_show_console2'].bind('click', Ace3.show_console)
-doc['kw_clear_console2'].bind('click', Ace3.clear_console)
-doc['clear_bd2'].bind('click', clear_bd2)
-# 呼叫函式執行
-run2()
-</script>
-</p>
-<p><!-- add 1 to 100 part2 開始 -->
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# 清除畫布
-def clear_bd2(ev):
-    bd = doc["brython_div2"]
-    bd.clear()
-
-# 利用 ace 中的 Editor 建立 Ace2 物件, 其中的輸入變數分別對應到頁面中的編輯區物件
-Ace4 = ace.Editor(editor_id="kw_editor2", console_id="kw_console2", container_id="kw__container2", storage_id="kw_py_src2" )
-
-# 透過 Ace4 以類別建立一個通用的 button2, 可以在多個案例中將 gist 程導入編輯區
-
-class button2:
-    def __init__(self, url):
-        self.url = url
-
-    # 記得加入 event 輸入變數
-    def do(self,ev):
-        Ace4.editor.setValue(open(self.url).read())
-        Ace4.editor.scrollToRow(0)
-        Ace4.editor.gotoLine(0)
-        Ace4.run()
-
-add1to100_url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c48e37714f055c3a0027cbfef59e442a6ef659b9/from_1_add_to_100_1.py"
-
-# 從 gist 取得程式碼
-add_src = open(add1to100_url).read()
-def add2(ev):
-    Ace4.editor.setValue(add_src)
-    Ace4.editor.scrollToRow(0)
-    Ace4.editor.gotoLine(0)
-    Ace4.run()
-
-# id 為 "add1to100part2" 的按鈕點按時, 執行 add 方法
-doc["add1to100part2"].bind('click', add2)
-# 以下為運用 button2 class 的通用 gist 程式導入區
-################################## cango_three_gears start
-cango_three_gears_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/cango_three_gears_brython_div2.py"
-cango_three_gears = button2(cango_three_gears_url)
-doc["cango_three_gears"].bind("click", cango_three_gears.do)
-################################## cango_three_gears end
-################################## bsnake start
-bsnake_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/kmol_snakey.py"
-bsnake = button2(bsnake_url)
-doc["bsnake"].bind("click", bsnake.do)
-################################## bsnake end
-################################## aitetris start
-aitetris_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/pygame_to_brython_tetris_ai.py"
-aitetris = button2(aitetris_url)
-doc["aitetris"].bind("click", aitetris.do)
-################################## aitetris end
-</script>
-</p>
-<p><!-- add 1 to 100 part2 結束--></p>
-<!-- editor2 開始 -->
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor2" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<p><!-- 存擋表單開始 --></p>
-<form><label>Filename: <input id="kw_filename2" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src2', 'kw_filename2');" type="submit" value="Save"/></form>
-<p><!-- 存擋表單結束 --></p>
-<p></p>
-<p><!-- 執行與清除按鈕開始 --></p>
-<p><button id="kw_run2">Run</button> <button id="kw_show_console2">Output</button> <button id="kw_clear_console2">清除輸出區</button><button id="clear_bd2">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
-<p><!-- 執行與清除按鈕結束 --></p>
-<p></p>
-<p><!-- 程式執行 ouput 區 --></p>
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console2"></textarea></div>
-<p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
-<div id="brython_div2"></div>
-<!-- editor2 結束 --><hr/>
-<p>
-<script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script>
-</p><br />Final << <a href='Final.html'>Previous</a> </div>
+    <div id="tipue_search_content">Important Vocabulary and Phrases (重要詞彙與短語) << <a href='Important Vocabulary and Phrases (重要詞彙與短語).html'>Previous</a> <a href='Final.html'>Next</a> >> Final<br /><h1>請列出上述文章中的重要的英文單字與解釋, 以及出現在文句中的用法</h1>
+<ol>
+<li data-end="1139" data-start="1109">Grammar Explanation (文法說明)</li>
+<li data-end="1157" data-start="1141">Sentence 1:</li>
+<li data-end="1226" data-start="1158">"Webots is a professional mobile robot simulation software package."</li>
+</ol>
+<ul data-end="1353" data-start="1227">
+<li data-end="1353" data-start="1227"><strong data-end="1241" data-start="1229">"Webots"</strong> (主語) <strong data-end="1253" data-start="1247">is</strong> (連繫動詞) <strong data-end="1320" data-start="1261">a professional mobile robot simulation software package</strong> (謂語名詞短語)。這是一個簡單的陳述句，描述Webots是什麼。</li>
+</ul>
+<ol>
+<li data-end="1371" data-start="1355">Sentence 2:</li>
+<li data-end="1539" data-start="1372">"It offers a rapid prototyping environment, that allows the user to create 3D virtual worlds with physics properties such as mass, joints, friction coefficients, etc."</li>
+</ol>
+<ul data-end="1783" data-start="1540">
+<li data-end="1581" data-start="1540"><strong data-end="1557" data-start="1542">"It offers"</strong> (主語 + 動詞) 介紹了Webots的功能。</li>
+<li data-end="1635" data-start="1582"><strong data-end="1601" data-start="1584">"that allows"</strong> 是一個關係子句，修飾 "environment"，解釋環境的功能。</li>
+<li data-end="1681" data-start="1636"><strong data-end="1662" data-start="1638">"the user to create"</strong>（不定式短語）說明用戶可以進行的操作。</li>
+<li data-end="1783" data-start="1682"><strong data-end="1763" data-start="1684">"with physics properties such as mass, joints, friction coefficients, etc."</strong> 提供有關虛擬世界的物理屬性的詳細信息。</li>
+</ul>
+<ol>
+<li data-end="1801" data-start="1785">Sentence 3:</li>
+<li data-end="1883" data-start="1802">"The user can add simple passive objects or active objects called mobile robots."</li>
+</ol>
+<ul data-end="2008" data-start="1884">
+<li data-end="1941" data-start="1884"><strong data-end="1908" data-start="1886">"The user can add"</strong>（主語 + 情態動詞 + 動詞原形）表示用戶可以進行的操作或許可。</li>
+<li data-end="2008" data-start="1942"><strong data-end="1970" data-start="1944">"called mobile robots"</strong> 是一個現在分詞短語，修飾 "active objects"，提供額外信息。</li>
+</ul>
+<ol>
+<li data-end="2026" data-start="2010">Sentence 4:</li>
+<li data-end="2130" data-start="2027">"These robots can have different locomotion schemes (wheeled robots, legged robots, or flying robots)."</li>
+</ol>
+<ul data-end="2207" data-start="2131">
+<li data-end="2152" data-start="2131"><strong data-end="2142" data-start="2133">"can"</strong> 表示能力或可能性。</li>
+<li data-end="2207" data-start="2153"><strong data-end="2189" data-start="2155">"different locomotion schemes"</strong> 表示機器人可以採用的不同移動方式。</li>
+</ul>
+<ol>
+<li data-end="2225" data-start="2209">Sentence 5:</li>
+<li data-end="2402" data-start="2226">"Moreover, they may be equipped with a number of sensor and actuator devices, such as distance sensors, drive wheels, cameras, motors, touch sensors, emitters, receivers, etc."</li>
+</ol>
+<ul data-end="2482" data-start="2403">
+<li data-end="2448" data-start="2403"><strong data-end="2426" data-start="2405">"may be equipped"</strong> 使用情態動詞 <strong data-end="2441" data-start="2434">may</strong> 表示可能性。</li>
+<li data-end="2482" data-start="2449"><strong data-end="2464" data-start="2451">"such as"</strong> 用來介紹感測器和驅動器裝置的例子。</li>
+</ul>
+<ol>
+<li data-end="2500" data-start="2484">Sentence 6:</li>
+<li data-end="2589" data-start="2501">"Finally, the user can program each robot individually to exhibit the desired behavior."</li>
+</ol>
+<ul data-end="2676" data-start="2590">
+<li data-end="2631" data-start="2590"><strong data-end="2618" data-start="2592">"The user can program"</strong> 顯示了用戶的能力或許可。</li>
+<li data-end="2676" data-start="2632"><strong data-end="2650" data-start="2634">"to exhibit"</strong> 是不定式動詞，說明編程的目的是為了表現所需的行為。</li>
+</ul>
+<ol>
+<li data-end="2694" data-start="2678">Sentence 7:</li>
+<li data-end="2905" data-start="2695">"Webots also contains a number of interfaces to real mobile robots, so that once your simulated robot behaves as expected, you can transfer its control program to a real robot like e-puck, DARwIn-OP, Nao, etc."</li>
+</ol>
+<ul data-end="3012" data-start="2906">
+<li data-end="2941" data-start="2906"><strong data-end="2921" data-start="2908">"so that"</strong> 引導目的子句，解釋為何要轉移控制程式。</li>
+<li data-end="3012" data-start="2942"><strong data-end="2983" data-start="2944">"once your simulated robot behaves"</strong> 是時間條件子句，表示模擬機器人表現正常後，才會進行轉移。</li>
+</ul>
+<ol>
+<li data-end="3030" data-start="3014">Sentence 8:</li>
+<li data-end="3059" data-start="3031">"What can I do with Webots?"</li>
+</ol>
+<ul data-end="3101" data-start="3060">
+<li data-end="3101" data-start="3060">這是一個簡單的疑問句，使用情態動詞 <strong data-end="3089" data-start="3080">"can"</strong> 問Webots的功能。</li>
+</ul>
+<ol>
+<li data-end="3119" data-start="3103">Sentence 9:</li>
+<li data-end="3209" data-start="3120">"Webots is well suited for research and educational projects related to mobile robotics."</li>
+</ol>
+<ul data-end="3307" data-start="3210">
+<li data-end="3253" data-start="3210"><strong data-end="3236" data-start="3212">"is well suited for"</strong> 表示Webots適合於某些用途。</li>
+<li data-end="3307" data-start="3254"><strong data-end="3288" data-start="3256">"related to mobile robotics"</strong> 描述了Webots所支持的研究領域。</li>
+</ul>
+<ol>
+<li data-end="3326" data-start="3309">Sentence 10:</li>
+<li data-end="3414" data-start="3327">"Many mobile robotics projects have relied on Webots for years in the following areas:"</li>
+</ol>
+<ul data-end="3480" data-start="3415">
+<li data-end="3458" data-start="3415"><strong data-end="3434" data-start="3417">"have relied"</strong> 使用現在完成時，表示一個持續或反覆發生的動作。</li>
+<li data-end="3480" data-start="3459">這句話列出了Webots被使用的領域。</li>
+</ul>
+<ol>
+<li data-end="3499" data-start="3482">Sentence 11:</li>
+<li data-end="3539" data-start="3500">"What do I need to know to use Webots?"</li>
+</ol>
+<ul data-end="3589" data-start="3540">
+<li data-end="3589" data-start="3540">這是另一個疑問句，使用 <strong data-end="3577" data-start="3554">"do I need to know"</strong> 來詢問需要掌握的知識。</li>
+</ul>
+<ol>
+<li data-end="3608" data-start="3591">Sentence 12:</li>
+<li data-end="3697" data-start="3609">"You will need a minimal amount of technical knowledge to develop your own simulations."</li>
+</ol>
+<ul data-end="3794" data-start="3698">
+<li data-end="3737" data-start="3698"><strong data-end="3719" data-start="3700">"You will need"</strong>（將來時）表示必須具備的條件或需求。</li>
+<li data-end="3794" data-start="3738"><strong data-end="3785" data-start="3740">"a minimal amount of technical knowledge"</strong> 指出所需的知識。</li>
+</ul>
+<ol>
+<li data-end="3813" data-start="3796">Sentence 13:</li>
+<li data-end="4076" data-start="3814">"If you don't want to use existing robot models provided within Webots and would like to create your own robot models, or add special objects in the simulated environments, you will need a basic knowledge of 3D computer graphics and VRML97 description language."</li>
+</ol>
+<ul data-end="4208" data-start="4077">
+<li data-end="4126" data-start="4077"><strong data-end="4102" data-start="4079">"If you don't want"</strong>（條件句）提出一種情境，表示若不使用現有的模型。</li>
+<li data-end="4167" data-start="4127"><strong data-end="4155" data-start="4129">"would like to create"</strong> 表示替代的期望或行動。</li>
+<li data-end="4208" data-start="4168"><strong data-end="4189" data-start="4170">"you will need"</strong>（將來時）強調執行某些操作所需的知識。</li>
+</ul>
+<ol>
+<li data-end="4227" data-start="4210">Sentence 14:</li>
+<li data-end="4256" data-start="4228">"How do I get User Support?"</li>
+</ol>
+<ul data-end="4280" data-start="4257">
+<li data-end="4280" data-start="4257">這是簡單的疑問句，詢問如何獲得使用者支持。</li>
+</ul>
+<hr data-end="4285" data-start="4282"/>
+<ol>
+<li data-end="4324" data-start="4287">Overall Grammar Features (整體文法特點)</li>
+</ol>
+<ul data-end="4684" data-is-last-node="" data-is-only-node="" data-start="4325">
+<li data-end="4393" data-start="4325"><strong data-end="4359" data-start="4327">Present Simple Tense (現在簡單時)</strong>: 用來描述事實或一般性資訊（例如："Webots is..."）。</li>
+<li data-end="4474" data-start="4394"><strong data-end="4435" data-start="4396">Modal Verbs (情態動詞)（can, may, would）</strong>: 表示可能性、能力或請求（例如："You can program..."）。</li>
+<li data-end="4550" data-start="4475"><strong data-end="4504" data-start="4477">Relative Clauses (關係子句)</strong>: 提供名詞的額外資訊（例如："robots called mobile robots"）。</li>
+<li data-end="4611" data-start="4551"><strong data-end="4575" data-start="4553">Future Tense (將來時)</strong>: 描述將來會發生的動作（例如："You will need..."）。</li>
+<li data-end="4684" data-is-last-node="" data-start="4612"><strong data-end="4643" data-start="4614">Conditional Clauses (條件句)</strong>: 描述假設的情況及其結果（例如："If you don't want..."）</li>
+</ul>
+<h4>  </h4>
+<br />Important Vocabulary and Phrases (重要詞彙與短語) << <a href='Important Vocabulary and Phrases (重要詞彙與短語).html'>Previous</a> <a href='Final.html'>Next</a> >> Final</div>
         
     <!-- footer -->
       <div class="container">
